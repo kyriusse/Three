@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Schéma de la base SQL</h2>
+{% for table in schema_data %}
+<section class="card">
+  <h3>{{ table.name }}</h3>
+  <ul>
+    {% for column in table.columns %}
+    <li>{{ column.name }} ({{ column.type }})</li>
+    {% endfor %}
+  </ul>
+  <details>
+    <summary>Aperçu des données</summary>
+    <table>
+      <thead>
+      <tr>
+        {% for key in table.preview[0].keys() if table.preview %}
+          <th>{{ key }}</th>
+        {% endfor %}
+      </tr>
+      </thead>
+      <tbody>
+      {% for row in table.preview %}
+        <tr>
+          {% for value in row %}<td>{{ value }}</td>{% endfor %}
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </details>
+</section>
+{% endfor %}
+{% endblock %}

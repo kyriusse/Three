@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Objets économiques</h2>
+<form method="get" class="row-form">
+  <input type="text" name="q" value="{{ search }}" placeholder="Filtrer nom, catégorie, origine">
+  <select name="order">
+    <option value="base_price_2025_desc" {% if order == 'base_price_2025_desc' %}selected{% endif %}>Prix décroissant</option>
+    <option value="base_price_2025_asc" {% if order == 'base_price_2025_asc' %}selected{% endif %}>Prix croissant</option>
+    <option value="name_asc" {% if order == 'name_asc' %}selected{% endif %}>Nom A→Z</option>
+  </select>
+  <button type="submit">Appliquer</button>
+</form>
+
+<table>
+  <thead>
+    <tr><th>Nom</th><th>Catégorie</th><th>Origine</th><th>Prix 2025</th><th>Impact éco</th><th>Impact écosystème</th></tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+      <tr>
+        <td>{{ row['name'] }}</td>
+        <td>{{ row['category'] }}</td>
+        <td>{{ row['origin_country'] }}</td>
+        <td>{{ row['base_price_2025'] }}</td>
+        <td>{{ row['economic_impact'] }}</td>
+        <td>{{ row['ecosystem_impact'] }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="6">Aucune ligne</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

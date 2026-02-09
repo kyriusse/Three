@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Three Simulation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header>
+  <h1>Three — Simulation (Flask + SQL)</h1>
+  <nav>
+    <a href="{{ url_for('home') }}">Accueil</a>
+    <a href="{{ url_for('objects_view') }}">Objets</a>
+    <a href="{{ url_for('origin_lookup') }}">Origine</a>
+    <a href="{{ url_for('sql_query') }}">SQL</a>
+    <a href="{{ url_for('simulate') }}">Simulation</a>
+    <a href="{{ url_for('schema') }}">Schéma BDD</a>
+  </nav>
+</header>
+
+<main>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flash-list">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>
