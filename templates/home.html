@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h2>Vue rapide</h2>
+  <p>Prix moyen 2025 des objets: <strong>{{ '%.2f'|format(avg_price) if avg_price is not none else 'N/A' }} €</strong></p>
+  <p>Tables détectées: {{ tables|join(', ') if tables else 'Aucune' }}</p>
+</section>
+
+<section class="card">
+  <h3>Derniers objets</h3>
+  <table>
+    <thead><tr><th>Nom</th><th>Catégorie</th><th>Origine</th><th>Prix 2025</th></tr></thead>
+    <tbody>
+    {% for item in latest_objects %}
+      <tr>
+        <td>{{ item['name'] }}</td>
+        <td>{{ item['category'] }}</td>
+        <td>{{ item['origin_country'] }}</td>
+        <td>{{ item['base_price_2025'] }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="4">Aucun objet</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

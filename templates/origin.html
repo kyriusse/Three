@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Origine d'un objet</h2>
+<form method="get" class="row-form">
+  <input type="text" name="name" value="{{ name }}" placeholder="Ex: Chaise">
+  <button type="submit">Chercher</button>
+</form>
+
+{% if result %}
+<section class="card">
+  <p><strong>{{ result['name'] }}</strong></p>
+  <p>Origine: {{ result['origin_country'] }}</p>
+  <p>Catégorie: {{ result['category'] }}</p>
+</section>
+{% elif name %}
+<p>Aucun objet correspondant.</p>
+{% endif %}
+{% endblock %}

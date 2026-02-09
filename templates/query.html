@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Requête SQL (SELECT uniquement)</h2>
+<form method="post">
+  <textarea name="query" rows="6">{{ query }}</textarea>
+  <button type="submit">Exécuter</button>
+</form>
+{% if error %}
+<p class="error">Erreur: {{ error }}</p>
+{% endif %}
+
+{% if columns %}
+<table>
+  <thead>
+    <tr>
+      {% for col in columns %}<th>{{ col }}</th>{% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+      <tr>
+        {% for col in columns %}<td>{{ row[col] }}</td>{% endfor %}
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}
